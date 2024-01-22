@@ -2,12 +2,19 @@
 import styles from "@/templates/SignupPage.module.css";
 import Link from "next/link";
 import { useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
 
 function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
 
+  const signupHandler = (e) => {
+    e.preventDefault();
+    if (password !== rePassword) {
+      toast.error("رمز و تکرار آن با هم برابر نیستند");
+    }
+  };
   return (
     <div className={styles.form}>
       <form>
@@ -30,11 +37,14 @@ function SignupPage() {
           value={rePassword}
           onChange={(e) => setRePassword(e.target.value)}
         ></input>
-        <button type="submit">ثبت نام</button>
+        <button type="submit" onClick={signupHandler}>
+          ثبت نام
+        </button>
       </form>
-      <p>حساب کاربری دارید ؟
-        <Link href='/signin'>ورود</Link>
+      <p>
+        حساب کاربری دارید ؟<Link href="/signin">ورود</Link>
       </p>
+      <Toaster />
     </div>
   );
 }
