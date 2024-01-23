@@ -1,5 +1,5 @@
 import nextAuth from "next-auth";
-import { CredentialsProvider } from "next-auth/providers";
+import CredentialsProvider from "next-auth/providers/credentials";
 import connectDB from "@/utils/connectDB";
 import User from "@/models/User";
 import { verifyPassword } from "@/utils/auth";
