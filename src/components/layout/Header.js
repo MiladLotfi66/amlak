@@ -7,7 +7,6 @@ import { useSession } from "next-auth/react";
 
 function Header() {
   const { data } = useSession();
-  console.log(data);
   return (
     <header className={styles.header}>
       <div>

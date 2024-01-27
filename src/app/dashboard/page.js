@@ -1,8 +1,18 @@
+import DashboardPage from "@/templates/dashboardPage";
+import { authOption } from "@/app/api/auth/[...nextauth]/route";
+import User from "@/models/User";
+import connectDB from "@/utils/connectDB";
+import { getServerSession } from "next-auth";
 
-function page() {
+async function page() {
+  await connectDB()
+  const session = await getServerSession(authOption);
+  const email = session.user.email;
+  const user =await User.findOne({ email: email });
+  const createdAt =user.createdAt
   return (
     <div>
-      داشبورد
+      <DashboardPage createdAt={createdAt}/>
     </div>
   )
 }
