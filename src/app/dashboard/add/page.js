@@ -1,10 +1,7 @@
-import React from 'react'
-
+import AddProfilePage from "@/templates/AddProfilePage"
 function page() {
   return (
-    <div>
-      add
-    </div>
+    <AddProfilePage/>
   )
 }
 
