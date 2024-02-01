@@ -1,11 +1,12 @@
-import React from 'react'
+import Profile from '@/models/Profile';
+import AddProfilePage from '@/templates/AddProfilePage';
+import connectDB from '@/utils/connectDB'
 
-function Edit({params:{profileId}}) {
-  console.log(profileId);
+async function Edit({params:{profileId}}) {
+    await connectDB();
+    const profile=await Profile.findOne({_id:profileId})
     return (
-    <div>
-     {profileId}
-    </div>
+    <AddProfilePage data={JSON.parse(JSON.stringify(profile))}/>
   )
 }
 

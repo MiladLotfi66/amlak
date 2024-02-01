@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "@/templates/addProfilePage.module.css";
 import TextInput from "@/module/textInput";
 import RadioList from "@/module/RadioList";
@@ -21,6 +21,12 @@ function AddProfilePage({ data }) {
     rules: [],
     amenities: [],
   });
+  useEffect(()=>{
+    setProfileData(data)
+  },[])
+  const editHandler=()=>{
+    console.log(data);
+  }
   const submitHandler = async () => {
     setLoading(true);
     const res = await fetch("/api/profile", {
@@ -39,12 +45,11 @@ function AddProfilePage({ data }) {
       // console.log("dmessage");
     }
     setLoading(false);
-
   };
 
   return (
     <div className={styles.container}>
-      <h3>ثبت آگهی</h3>
+      <h3>{data ? "ویرایش داده ها" : "ثبت داده ها"}</h3>
       <TextInput
         title="عنوان"
         name="title"
@@ -101,7 +106,11 @@ function AddProfilePage({ data }) {
       />
       <Toaster />
       {loading ? (
-       <Loader/>
+        <Loader />
+      ) : data ? (
+        <button className={styles.submit} onClick={editHandler}>
+          ویرایش آگهی
+        </button>
       ) : (
         <button className={styles.submit} onClick={submitHandler}>
           ثبت آگهی
